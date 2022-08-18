@@ -133,4 +133,13 @@
       <Name>XamarinNoteApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newNote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newNoteMini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back.png" />
+  </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using XamarinNoteApp.Data;
 using XamarinNoteApp.Interfaces;
@@ -48,8 +49,10 @@ namespace XamarinNoteApp.Services
             return note;
         }
 
-        public async Task<List<Note>> GetNotes()
+        public async Task<IEnumerable<Note>> GetNotes()
         {
+            Console.WriteLine(_database);
+            Console.WriteLine("Getting Notes");
             return await _database.Table<Note>().ToListAsync();
         }
     }

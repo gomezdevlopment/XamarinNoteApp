@@ -8,7 +8,7 @@ namespace XamarinNoteApp.Interfaces
 {
     public interface INoteRepository
     {
-        Task<List<Note>> GetNotes();
+        Task<IEnumerable<Note>> GetNotes();
 
         Task<Note> GetNoteById(int id);
 
