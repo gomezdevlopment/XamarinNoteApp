@@ -48,7 +48,7 @@
                                             <Label Text="{Binding Text}" LineBreakMode="TailTruncation" />
                                         </FlexLayout>
                                     </Frame>
-                                    <Label Text="Title" />
+                                    <Label Text="{Binding Title}" />
                                     <Label Text="Date" />
                                 </FlexLayout>
                             </DataTemplate>

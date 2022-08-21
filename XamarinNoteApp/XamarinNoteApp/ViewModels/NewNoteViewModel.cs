@@ -50,5 +50,15 @@ namespace XamarinNoteApp.ViewModels
 
             await Application.Current.MainPage.Navigation.PopAsync();
         }
+
+        public ICommand OpenMenuCommand => new Command(OpenMenu);
+
+        private void OpenMenu()
+        {
+            Random r = new Random();
+            int rInt = r.Next(0, 7);
+            NewNoteColor = rInt;
+            Console.WriteLine("Open menu");
+        }
     }
 }

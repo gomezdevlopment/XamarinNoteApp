@@ -142,4 +142,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\back.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menuDots.png" />
+  </ItemGroup>
 </Project>
