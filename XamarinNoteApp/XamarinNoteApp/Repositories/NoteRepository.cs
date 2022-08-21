@@ -53,7 +53,15 @@ namespace XamarinNoteApp.Services
         {
             Console.WriteLine(_database);
             Console.WriteLine("Getting Notes");
-            return await _database.Table<Note>().ToListAsync();
+            var results = await _database.Table<Note>().ToListAsync();
+            Console.WriteLine("Query Complete");
+            Console.WriteLine(results.Count);
+            foreach (var note in results)
+            {
+                Console.WriteLine("Note");
+                Console.WriteLine(note.Text);
+            }
+            return results;
         }
     }
 }

@@ -15,7 +15,7 @@
             </FlexLayout>
             <Editor
                 Placeholder="Type here..."
-                HeightRequest="500"
+                HeightRequest="1000"
                 Text="{Binding NewNoteText}" />
         </StackLayout>
     </ContentPage.Content>

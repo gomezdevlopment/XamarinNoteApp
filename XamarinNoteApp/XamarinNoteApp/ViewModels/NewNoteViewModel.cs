@@ -1,30 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinNoteApp.Services;
 using XamarinNoteApp.Enum;
+using XamarinNoteApp.Models;
 
 namespace XamarinNoteApp.ViewModels
 {
     public class NewNoteViewModel
     {
-        private String NewNoteTitle { get; set; }
-        private String NewNoteText { get; set; }
+        public String NewNoteTitle { get; set; }
+        public String NewNoteText { get; set; }
+        public int NewNoteColor { get; set; }
         private NoteRepository _noteRepository;
+        private MainPageViewModel _mainPageViewModel;
+        private Note _note;
 
-        public NewNoteViewModel(NoteRepository noteRepository)
+        public NewNoteViewModel(MainPageViewModel mainPageViewModel, Note note)
         {
-            _noteRepository = noteRepository;
+            NewNoteTitle = "Empty Title";
+            NewNoteColor = (int)Colors.Yellow;
+            _noteRepository = new NoteRepository();
+            _mainPageViewModel = mainPageViewModel;
+            _note = note;
+
+            if (_note != null)
+            {
+                NewNoteTitle = note.Title;
+                NewNoteText = note.Text;
+                NewNoteColor = note.Color;
+            }
         }
 
         public ICommand SaveNoteCommand => new Command(SaveNote);
 
         private async void SaveNote()
         {
-            Console.WriteLine(NewNoteText);
-            await _noteRepository.CreateNote(NewNoteTitle, NewNoteText, (int)Colors.Yellow);
+            if (NewNoteText != null && _note == null)
+            {
+                await _noteRepository.CreateNote(NewNoteTitle, NewNoteText, NewNoteColor);
+                _mainPageViewModel.GetNotesFromDb();
+            }
+
+            if (_note != null)
+            {
+                await _noteRepository.EditNote(_note.Id, NewNoteTitle, NewNoteText, NewNoteColor);
+                _mainPageViewModel.GetNotesFromDb();
+            }
+
             await Application.Current.MainPage.Navigation.PopAsync();
         }
     }

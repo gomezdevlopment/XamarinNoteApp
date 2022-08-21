@@ -3,34 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinNoteApp.ViewModels"
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
+             xmlns:converters="clr-namespace:XamarinNoteApp.Converters"
              x:Class="XamarinNoteApp.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ColorConverter x:Key="colorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <local:MainPageViewModel />
     </ContentPage.BindingContext>
 
     <AbsoluteLayout>
-        <StackLayout>
-            <FlexLayout JustifyContent="Center" AlignContent="Center" Margin="100">
-                <Label Text="All Notes" FontSize='30' FontAttributes="Bold" />
-            </FlexLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds = "0,0,1,1" AbsoluteLayout.LayoutFlags = "All">
+            <StackLayout>
+                <FlexLayout JustifyContent="Center" AlignContent="Center" Margin="100">
+                    <Label Text="All Notes" FontSize='30' FontAttributes="Bold" />
+                </FlexLayout>
 
-            <Grid RowDefinitions="Auto" Padding="30" RowSpacing="40">
-                <CollectionView SelectionMode="Single" ItemsSource="{Binding Notes}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="20" HorizontalItemSpacing="20" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.EmptyView>
-                        <Label Text="You have no notes..." />
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="item" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
-        </StackLayout>
+                <Grid x:Name="NotesGrid" RowDefinitions="Auto" Padding="0" Margin="20,0" RowSpacing="0">
+                    <CollectionView SelectionMode="Single" ItemsSource="{Binding Notes}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="0" VerticalItemSpacing="30" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Text="You have no notes..." />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <FlexLayout Direction="Column" AlignItems="Center">
+                                    <Frame CornerRadius="15"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start"
+                                   HasShadow="True"
+                                   IsClippedToBounds="True"
+                                   Padding="0">
+
+                                        <FlexLayout HeightRequest="100" WidthRequest="100" BackgroundColor="{Binding Color, Converter={StaticResource colorConverter}}">
+                                            <FlexLayout.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.OpenNoteCommand}" CommandParameter="{Binding .}" />
+                                            </FlexLayout.GestureRecognizers>
+                                            <Label Text="{Binding Text}" LineBreakMode="TailTruncation" />
+                                        </FlexLayout>
+                                    </Frame>
+                                    <Label Text="Title" />
+                                    <Label Text="Date" />
+                                </FlexLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
 
         <fab:FloatingActionButtonView
             Command="{Binding OpenNewNoteScreenCommand}"
