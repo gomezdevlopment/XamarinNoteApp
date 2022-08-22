@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:XamarinNoteApp.Converters"
-             x:Class="XamarinNoteApp.Views.NewNotePage">
+             x:Class="XamarinNoteApp.Views.NewNote.NewNotePage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ColorConverter x:Key="colorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout BackgroundColor="{Binding NewNoteColor, Converter={StaticResource colorConverter}}">
             <FlexLayout Direction="Row" HeightRequest="60" Margin="10, 0" AlignItems="Center">

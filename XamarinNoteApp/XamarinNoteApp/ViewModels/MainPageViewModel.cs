@@ -4,7 +4,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinNoteApp.Models;
 using XamarinNoteApp.Services;
-using XamarinNoteApp.Views;
+using XamarinNoteApp.Views.NewNote;
 
 namespace XamarinNoteApp.ViewModels
 {

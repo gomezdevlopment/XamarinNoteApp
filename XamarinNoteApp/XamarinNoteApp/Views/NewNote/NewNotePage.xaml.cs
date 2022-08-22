@@ -9,7 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinNoteApp.Models;
 
-namespace XamarinNoteApp.Views
+namespace XamarinNoteApp.Views.NewNote
 {
     public partial class NewNotePage : ContentPage
     {
