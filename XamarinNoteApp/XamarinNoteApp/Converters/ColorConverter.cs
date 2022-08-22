@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 using XamarinNoteApp.Enum;
-using XamarinNoteApp.Models;
 
 namespace XamarinNoteApp.Converters
 {
@@ -16,19 +13,19 @@ namespace XamarinNoteApp.Converters
             if (color != null)
             {
                 if (color == (int)Colors.Yellow)
-                    return Color.Yellow;
+                    return Color.FromHex("#FCEE96");
                 if (color == (int)Colors.Green)
-                    return Color.Green;
+                    return Color.FromHex("#D2FBA4");
                 if (color == (int)Colors.Blue)
-                    return Color.Blue;
+                    return Color.FromHex("#7EB6D7");
                 if (color == (int)Colors.Purple)
-                    return Color.Purple;
+                    return Color.FromHex("#D3B5E5");
                 if (color == (int)Colors.Pink)
-                    return Color.Pink;
+                    return Color.FromHex("#FFD4DB");
                 if (color == (int)Colors.Red)
-                    return Color.Red;
+                    return Color.FromHex("#E77480");
                 if (color == (int)Colors.Orange)
-                    return Color.Orange;
+                    return Color.FromHex("#F7BA8E");
             }
 
             return Color.LightGray;

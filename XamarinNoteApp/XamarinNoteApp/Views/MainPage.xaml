@@ -45,10 +45,10 @@
                                             <FlexLayout.GestureRecognizers>
                                                 <TapGestureRecognizer  Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.OpenNoteCommand}" CommandParameter="{Binding .}" />
                                             </FlexLayout.GestureRecognizers>
-                                            <Label Text="{Binding Text}" LineBreakMode="TailTruncation" />
+                                            <Label Text="{Binding Text}" MaxLines="5" LineBreakMode="TailTruncation" Padding="15" FontSize="12"/>
                                         </FlexLayout>
                                     </Frame>
-                                    <Label Text="{Binding Title}" />
+                                    <Label Text="{Binding Title}"/>
                                     <Label Text="Date" />
                                 </FlexLayout>
                             </DataTemplate>
