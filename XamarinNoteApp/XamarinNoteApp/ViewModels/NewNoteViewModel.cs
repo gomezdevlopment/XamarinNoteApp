@@ -18,6 +18,7 @@ namespace XamarinNoteApp.ViewModels
         private int newNoteColor;
         public String NewNoteTitle { get; set; }
         public String NewNoteText { get; set; }
+        public String NewNoteDate { get; set; }
 
         public int NewNoteColor
         {
@@ -57,8 +58,8 @@ namespace XamarinNoteApp.ViewModels
                 ((int)Colors.Red),
                 ((int)Colors.Orange),
             };
-            NewNoteTitle = "Empty Title";
-
+            NewNoteTitle = "";
+            NewNoteDate = DateTime.Now.ToString();
             _noteRepository = new NoteRepository();
             _mainPageViewModel = mainPageViewModel;
             _note = note;
@@ -67,6 +68,7 @@ namespace XamarinNoteApp.ViewModels
             {
                 NewNoteTitle = note.Title;
                 NewNoteText = note.Text;
+                NewNoteDate = note.Date;
                 NewNoteColor = note.Color;
             }
         }
@@ -77,13 +79,13 @@ namespace XamarinNoteApp.ViewModels
         {
             if (NewNoteText != null && _note == null)
             {
-                await _noteRepository.CreateNote(NewNoteTitle, NewNoteText, NewNoteColor);
+                await _noteRepository.CreateNote(NewNoteTitle, NewNoteText, NewNoteDate, NewNoteColor);
                 _mainPageViewModel.GetNotesFromDb();
             }
 
             if (_note != null)
             {
-                await _noteRepository.EditNote(_note.Id, NewNoteTitle, NewNoteText, NewNoteColor);
+                await _noteRepository.EditNote(_note.Id, NewNoteTitle, NewNoteText, NewNoteDate, NewNoteColor);
                 _mainPageViewModel.GetNotesFromDb();
             }
 
@@ -94,6 +96,8 @@ namespace XamarinNoteApp.ViewModels
 
         private void OpenMenu()
         {
+            var today = DateTime.Now.ToString();
+            Console.WriteLine(today);
             var noteColorSelectionPopup = new NoteColorSelectionPopup();
             noteColorSelectionPopup.BindingContext = this;
             Application.Current.MainPage.Navigation.ShowPopup(noteColorSelectionPopup);

@@ -13,12 +13,13 @@ namespace XamarinNoteApp.Services
     {
         private readonly SQLiteAsyncConnection _database = App.Database;
 
-        public async Task CreateNote(string title, string text, int color)
+        public async Task CreateNote(string title, string text, string date, int color)
         {
             var note = new Note
             {
                 Title = title,
                 Text = text,
+                Date = date,
                 Color = color
             };
 
@@ -30,13 +31,14 @@ namespace XamarinNoteApp.Services
             await _database.DeleteAsync(id);
         }
 
-        public async Task EditNote(int id, string title, string text, int color)
+        public async Task EditNote(int id, string title, string text, string date, int color)
         {
             var note = new Note
             {
                 Id = id,
                 Title = title,
                 Text = text,
+                Date = date,
                 Color = color
             };
 
@@ -51,16 +53,7 @@ namespace XamarinNoteApp.Services
 
         public async Task<IEnumerable<Note>> GetNotes()
         {
-            Console.WriteLine(_database);
-            Console.WriteLine("Getting Notes");
             var results = await _database.Table<Note>().ToListAsync();
-            Console.WriteLine("Query Complete");
-            Console.WriteLine(results.Count);
-            foreach (var note in results)
-            {
-                Console.WriteLine("Note");
-                Console.WriteLine(note.Text);
-            }
             return results;
         }
     }

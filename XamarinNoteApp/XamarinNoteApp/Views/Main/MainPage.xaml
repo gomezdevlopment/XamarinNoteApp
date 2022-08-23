@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:XamarinNoteApp.ViewModels"
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
              xmlns:converters="clr-namespace:XamarinNoteApp.Converters"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="XamarinNoteApp.MainPage">
 
     <ContentPage.Resources>
@@ -41,15 +42,17 @@
                                    IsClippedToBounds="True"
                                    Padding="0">
 
-                                        <FlexLayout HeightRequest="100" WidthRequest="100" BackgroundColor="{Binding Color, Converter={StaticResource colorConverter}}">
-                                            <FlexLayout.GestureRecognizers>
-                                                <TapGestureRecognizer  Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.OpenNoteCommand}" CommandParameter="{Binding .}" />
-                                            </FlexLayout.GestureRecognizers>
-                                            <Label Text="{Binding Text}" MaxLines="5" LineBreakMode="TailTruncation" Padding="15" FontSize="12"/>
+                                        <FlexLayout HeightRequest="100"
+                                                    WidthRequest="100"
+                                                    BackgroundColor="{Binding Color, Converter={StaticResource colorConverter}}"
+                                                    xct:TouchEffect.NativeAnimation="true"
+                                                    xct:TouchEffect.Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.OpenNoteCommand}"
+                                                    xct:TouchEffect.CommandParameter="{Binding .}">
+                                            <Label Text="{Binding Text}" MaxLines="5" LineBreakMode="TailTruncation" Padding="15" FontSize="12" />
                                         </FlexLayout>
                                     </Frame>
-                                    <Label Text="{Binding Title}"/>
-                                    <Label Text="Date" />
+                                    <Label Text="{Binding Title}" MaxLines="1"  WidthRequest="95" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Date}" MaxLines="1" WidthRequest="80" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"/>
                                 </FlexLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

@@ -44,11 +44,30 @@
                                    HasShadow="True"
                                    IsClippedToBounds="True"
                                    Padding="0">
+                                    <!--<VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup>
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="HeightRequest" Value="60" />
+                                                    <Setter Property="WidthRequest" Value="40" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="HeightRequest" Value="80" />
+                                                    <Setter Property="WidthRequest" Value="60" />
+                                                    <Setter Property="BackgroundColor" Value="Yellow" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>-->
 
-                                    <FlexLayout HeightRequest="60" WidthRequest="40" BackgroundColor="{Binding ., Converter={StaticResource colorConverter}}">
-                                        <FlexLayout.GestureRecognizers>
-                                            <TapGestureRecognizer  Command="{Binding Source={x:Reference NoteColorGrid}, Path=BindingContext.ChangeNoteColorCommand}" CommandParameter="{Binding .}" />
-                                        </FlexLayout.GestureRecognizers>
+                                    <FlexLayout HeightRequest="60"
+                                                WidthRequest="40"
+                                                BackgroundColor="{Binding ., Converter={StaticResource colorConverter}}"
+                                                xct:TouchEffect.NativeAnimation="true"
+                                                xct:TouchEffect.Command="{Binding Source={x:Reference NoteColorGrid}, Path=BindingContext.ChangeNoteColorCommand}"
+                                                xct:TouchEffect.CommandParameter="{Binding .}">
                                     </FlexLayout>
                                 </Frame>
                             </FlexLayout>

@@ -12,10 +12,10 @@ namespace XamarinNoteApp.Interfaces
 
         Task<Note> GetNoteById(int id);
 
-        Task CreateNote(string title, string text, int color);
+        Task CreateNote(string title, string text, string date, int color);
 
         Task DeleteNote(int id);
 
-        Task EditNote(int id, string title, string text, int color);
+        Task EditNote(int id, string title, string text, string date, int color);
     }
 }
