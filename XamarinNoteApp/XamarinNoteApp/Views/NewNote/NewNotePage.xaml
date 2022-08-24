@@ -18,23 +18,21 @@
                     Command="{Binding SaveNoteCommand}"
                     Source="back.png"
                     HeightRequest="50"
-                    WidthRequest="50"    
+                    WidthRequest="50"
                     BackgroundColor="Transparent"
                     Padding="15"
                     CornerRadius="30"
-                    xct:TouchEffect.NativeAnimation="True"/>
-                <Entry Placeholder="Title" Text="{Binding NewNoteTitle}" FlexLayout.Grow="1"/>
+                    xct:TouchEffect.NativeAnimation="True" />
+                <Entry Placeholder="Title" Text="{Binding NewNoteTitle}" FlexLayout.Grow="1" />
                 <ImageButton
                     Command="{Binding OpenMenuCommand}"
                     Source="menuDots.png"
                     HeightRequest="50"
-                    WidthRequest="50"  
+                    WidthRequest="50"
                     BackgroundColor="Transparent"
                     Padding="15"
                     CornerRadius="30"
-                    xct:TouchEffect.NativeAnimation="True"
-                    />
-
+                    xct:TouchEffect.NativeAnimation="True" />
             </FlexLayout>
             <Editor
                 Margin="20, 0"

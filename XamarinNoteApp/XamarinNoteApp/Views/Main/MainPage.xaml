@@ -25,7 +25,7 @@
                 </FlexLayout>
 
                 <Grid x:Name="NotesGrid" RowDefinitions="Auto" Padding="0" Margin="20,0" RowSpacing="0">
-                    <CollectionView SelectionMode="Single" ItemsSource="{Binding Notes}">
+                    <CollectionView x:Name="NotesCV" SelectionMode="{Binding SelectionMode}" SelectedItems="{Binding SelectedNotes}" ItemsSource="{Binding Notes}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="0" VerticalItemSpacing="30" />
                         </CollectionView.ItemsLayout>
@@ -35,6 +35,21 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <FlexLayout Direction="Column" AlignItems="Center">
+                                    <VisualStateManager.VisualStateGroups x:Name="CommonStates">
+                                        <VisualStateGroup>
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter TargetName="Check" Property="Image.IsVisible" Value="False" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter TargetName="Check" Property="Image.IsVisible" Value="True" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
                                     <Frame CornerRadius="15"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Start"
@@ -42,17 +57,28 @@
                                    IsClippedToBounds="True"
                                    Padding="0">
 
-                                        <FlexLayout HeightRequest="100"
+                                        <AbsoluteLayout HeightRequest="100"
                                                     WidthRequest="100"
                                                     BackgroundColor="{Binding Color, Converter={StaticResource colorConverter}}"
                                                     xct:TouchEffect.NativeAnimation="true"
-                                                    xct:TouchEffect.Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.OpenNoteCommand}"
-                                                    xct:TouchEffect.CommandParameter="{Binding .}">
+                                                    xct:TouchEffect.Command="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.TapNoteCommand}"
+                                                    xct:TouchEffect.CommandParameter="{Binding .}"
+                                                    xct:TouchEffect.LongPressCommand="{Binding Source={x:Reference NotesGrid}, Path=BindingContext.LongPressNoteCommand}"
+                                                    xct:TouchEffect.LongPressCommandParameter="{Binding .}">
+                                            <Image
+                                                x:Name="Check"
+                                                Source="check.png"
+                                                HeightRequest="20"
+                                                WidthRequest="20"
+                                                BackgroundColor="Transparent"
+                                                Margin="5"
+                                                IsVisible="false"
+                                                xct:IconTintColorEffect.TintColor="Orange" />
                                             <Label Text="{Binding Text}" MaxLines="5" LineBreakMode="TailTruncation" Padding="15" FontSize="12" />
-                                        </FlexLayout>
+                                        </AbsoluteLayout>
                                     </Frame>
                                     <Label Text="{Binding Title}" MaxLines="1"  WidthRequest="95" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" />
-                                    <Label Text="{Binding Date}" MaxLines="1" WidthRequest="80" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding Date}" MaxLines="1" WidthRequest="80" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" />
                                 </FlexLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
