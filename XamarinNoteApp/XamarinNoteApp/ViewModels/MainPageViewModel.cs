@@ -14,8 +14,32 @@ namespace XamarinNoteApp.ViewModels
         public ObservableCollection<Note> Notes { get; set; }
         private ObservableCollection<object> _selectedNotes;
         private NoteRepository noteRepository;
-
         private SelectionMode _selectionMode = SelectionMode.None;
+
+        private bool _multiSelectEnabled = false;
+        private bool _showFab = true;
+
+        public bool ShowFab
+
+        {
+            get => _showFab;
+            set
+            {
+                _showFab = value;
+                OnPropertyChanged(nameof(ShowFab));
+            }
+        }
+
+        public bool MultiSelectEnabled
+
+        {
+            get => _multiSelectEnabled;
+            set
+            {
+                _multiSelectEnabled = value;
+                OnPropertyChanged(nameof(MultiSelectEnabled));
+            }
+        }
 
         public SelectionMode SelectionMode
         {
@@ -101,6 +125,8 @@ namespace XamarinNoteApp.ViewModels
             {
                 if (_selectionMode == SelectionMode.None)
                 {
+                    ShowFab = false;
+                    MultiSelectEnabled = true;
                     SelectionMode = SelectionMode.Multiple;
                     SelectedNotes.Add(selectedNote);
                 }

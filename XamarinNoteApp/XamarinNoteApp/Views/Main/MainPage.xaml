@@ -94,7 +94,35 @@
             Size="Normal"
             ColorNormal="White"
             ColorRipple="Gray"
+            IsVisible="{Binding ShowFab}"
             AbsoluteLayout.LayoutFlags="PositionProportional"
 			AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" />
+
+        <FlexLayout
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+			AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+            Direction="Row"
+            HeightRequest="60"
+            AlignItems="Center"
+            JustifyContent="Center"
+            IsVisible="{Binding MultiSelectEnabled}">
+
+            <FlexLayout
+                HeightRequest="60"
+                WidthRequest="60"
+                Direction="Column"
+                JustifyContent="Center"
+                AlignItems="Center"
+                AlignContent="Center"
+                xct:CornerRadiusEffect.CornerRadius="20"
+                xct:TouchEffect.NativeAnimation="True">
+                <Image
+                    Source="trash.png"
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    BackgroundColor="Transparent" />
+                <Label Text="Delete" FontSize="10" HorizontalTextAlignment="Center" />
+            </FlexLayout>
+        </FlexLayout>
     </AbsoluteLayout>
 </ContentPage>
