@@ -115,7 +115,8 @@
                 AlignItems="Center"
                 AlignContent="Center"
                 xct:CornerRadiusEffect.CornerRadius="20"
-                xct:TouchEffect.NativeAnimation="True">
+                xct:TouchEffect.NativeAnimation="True"
+                xct:TouchEffect.Command="{Binding DeleteNotesCommand}">
                 <Image
                     Source="trash.png"
                     HeightRequest="20"

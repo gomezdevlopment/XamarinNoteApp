@@ -14,7 +14,7 @@ namespace XamarinNoteApp.Interfaces
 
         Task CreateNote(string title, string text, string date, int color);
 
-        Task DeleteNote(int id);
+        Task DeleteNote(Note note);
 
         Task EditNote(int id, string title, string text, string date, int color);
     }

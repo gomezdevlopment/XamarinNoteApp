@@ -26,9 +26,9 @@ namespace XamarinNoteApp.Services
             await _database.InsertAsync(note);
         }
 
-        public async Task DeleteNote(int id)
+        public async Task DeleteNote(Note note)
         {
-            await _database.DeleteAsync(id);
+            await _database.DeleteAsync(note);
         }
 
         public async Task EditNote(int id, string title, string text, string date, int color)

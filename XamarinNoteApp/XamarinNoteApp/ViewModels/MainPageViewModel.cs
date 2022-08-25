@@ -13,7 +13,7 @@ namespace XamarinNoteApp.ViewModels
     {
         public ObservableCollection<Note> Notes { get; set; }
         private ObservableCollection<object> _selectedNotes;
-        private NoteRepository noteRepository;
+        private NoteRepository _noteRepository;
         private SelectionMode _selectionMode = SelectionMode.None;
 
         private bool _multiSelectEnabled = false;
@@ -72,7 +72,7 @@ namespace XamarinNoteApp.ViewModels
 
         public MainPageViewModel()
         {
-            noteRepository = new NoteRepository();
+            _noteRepository = new NoteRepository();
             Notes = new ObservableCollection<Note>();
             _selectedNotes = new ObservableCollection<object>();
             TapNoteCommand = new Command<Note>(TapNote);
@@ -94,7 +94,7 @@ namespace XamarinNoteApp.ViewModels
         public async void GetNotesFromDb()
         {
             Notes.Clear();
-            var notes = await noteRepository.GetNotes();
+            var notes = await _noteRepository.GetNotes();
             foreach (Note note in notes)
             {
                 Notes.Add(note);
@@ -131,6 +131,21 @@ namespace XamarinNoteApp.ViewModels
                     SelectedNotes.Add(selectedNote);
                 }
             }
+        }
+
+        public ICommand DeleteNotesCommand => new Command(DeleteNotes);
+
+        private async void DeleteNotes()
+        {
+            foreach (Note note in SelectedNotes)
+            {
+                Console.WriteLine(note.Id + " this is a note id");
+                await _noteRepository.DeleteNote(note);
+            }
+            ShowFab = true;
+            MultiSelectEnabled = false;
+            SelectionMode = SelectionMode.None;
+            GetNotesFromDb();
         }
     }
 }
