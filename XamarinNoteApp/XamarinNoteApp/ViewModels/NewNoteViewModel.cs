@@ -13,36 +13,33 @@ namespace XamarinNoteApp.ViewModels
 {
     public class NewNoteViewModel : INotifyPropertyChanged
     {
-        private int newNoteColor;
+        public ICommand SaveNoteCommand => new Command(SaveNote);
+        public ICommand OpenMenuCommand => new Command(OpenMenu);
+        public ICommand ChangeNoteColorCommand => new Command(ChangeNoteColor);
+
         public String NewNoteTitle { get; set; }
         public String NewNoteText { get; set; }
         public String NewNoteDate { get; set; }
-
-        public int NewNoteColor
-        {
-            get => newNoteColor;
-            set
-            {
-                if (newNoteColor != value)
-                {
-                    newNoteColor = value;
-                    OnPropertyChanged(nameof(NewNoteColor));
-                }
-            }
-        }
+        public ObservableCollection<int> NoteColors { get; set; }
 
         private NoteRepository _noteRepository;
         private MainPageViewModel _mainPageViewModel;
         private Note _note;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private int _newNoteColor;
 
-        public void OnPropertyChanged(string propertyName)
+        public int NewNoteColor
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _newNoteColor;
+            set
+            {
+                if (_newNoteColor != value)
+                {
+                    _newNoteColor = value;
+                    OnPropertyChanged(nameof(NewNoteColor));
+                }
+            }
         }
-
-        public ObservableCollection<int> NoteColors { get; set; }
 
         public NewNoteViewModel(MainPageViewModel mainPageViewModel, Note note)
         {
@@ -71,8 +68,6 @@ namespace XamarinNoteApp.ViewModels
             }
         }
 
-        public ICommand SaveNoteCommand => new Command(SaveNote);
-
         private async void SaveNote()
         {
             if (NewNoteText != null && _note == null)
@@ -90,8 +85,6 @@ namespace XamarinNoteApp.ViewModels
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
-        public ICommand OpenMenuCommand => new Command(OpenMenu);
-
         private void OpenMenu()
         {
             var today = DateTime.Now.ToString();
@@ -101,12 +94,17 @@ namespace XamarinNoteApp.ViewModels
             Application.Current.MainPage.Navigation.ShowPopup(noteColorSelectionPopup);
         }
 
-        public ICommand ChangeNoteColorCommand => new Command(ChangeNoteColor);
-
         private void ChangeNoteColor(object o)
         {
             int color = (int)o;
             NewNoteColor = color;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

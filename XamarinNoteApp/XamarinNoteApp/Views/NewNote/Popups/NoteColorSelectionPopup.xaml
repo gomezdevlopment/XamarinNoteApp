@@ -26,8 +26,9 @@
 
         <FlexLayout Direction="Column">
             <Label Text="Background Color" FontAttributes="Bold" />
-            <Grid x:Name="NoteColorGrid" RowDefinitions="Auto" Padding="0" Margin="0, 20" RowSpacing="0" HorizontalOptions="Center" HeightRequest="60">
+            <Grid x:Name="NoteColorGrid" RowDefinitions="Auto" Padding="0" Margin="0, 20" RowSpacing="0" HorizontalOptions="Center" HeightRequest="80">
                 <CollectionView SelectionMode="Single"
+                                SelectedItem="{Binding NewNoteColor}"
                                 ItemsSource="{Binding NoteColors}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="0" VerticalItemSpacing="0" />
@@ -37,37 +38,46 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <FlexLayout Direction="Column" AlignItems="Center">
-                                <Frame CornerRadius="2"
+                            <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="Center">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState Name="Normal">
+                                            <VisualState.Setters>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter TargetName="ColorItem" Property="HeightRequest" Value="75" />
+                                                <Setter TargetName="ColorItem" Property="WidthRequest" Value="50" />
+                                                <Setter TargetName="SelectedCheckMark" Property="IsVisible" Value="True" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Frame CornerRadius="1"
+                                   BackgroundColor="Transparent"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Start"
                                    HasShadow="True"
                                    IsClippedToBounds="True"
                                    Padding="0">
-                                    <!--<VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup>
-                                            <VisualState Name="Normal">
-                                                <VisualState.Setters>
-                                                    <Setter Property="HeightRequest" Value="60" />
-                                                    <Setter Property="WidthRequest" Value="40" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                            <VisualState Name="Selected">
-                                                <VisualState.Setters>
-                                                    <Setter Property="HeightRequest" Value="80" />
-                                                    <Setter Property="WidthRequest" Value="60" />
-                                                    <Setter Property="BackgroundColor" Value="Yellow" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>-->
-
-                                    <FlexLayout HeightRequest="60"
+                                    <FlexLayout x:Name="ColorItem"
+                                                HeightRequest="60"
                                                 WidthRequest="40"
                                                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}}"
                                                 xct:TouchEffect.NativeAnimation="true"
                                                 xct:TouchEffect.Command="{Binding Source={x:Reference NoteColorGrid}, Path=BindingContext.ChangeNoteColorCommand}"
                                                 xct:TouchEffect.CommandParameter="{Binding .}">
+                                        <Label x:Name="SelectedCheckMark"
+                                               Text="{StaticResource Check}"
+                                               FontFamily="FAS"
+                                               FontSize="Large"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Center"
+                                               HeightRequest="75"
+                                               WidthRequest="50"
+                                               TextColor="White"
+                                               IsVisible="False" />
                                     </FlexLayout>
                                 </Frame>
                             </FlexLayout>

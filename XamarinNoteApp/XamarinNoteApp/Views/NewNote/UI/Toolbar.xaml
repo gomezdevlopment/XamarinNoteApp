@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinNoteApp.Views.NewNote.UI.Toolbar"
              xmlns:ui="clr-namespace:XamarinNoteApp.Views.NewNote.UI"
-            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              JustifyContent="Center"
              Direction="Row"
              BackgroundColor="White"

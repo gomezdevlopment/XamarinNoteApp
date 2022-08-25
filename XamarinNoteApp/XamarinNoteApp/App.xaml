@@ -12,6 +12,7 @@
             <x:String x:Key="Italic">&#xf033;</x:String>
             <x:String x:Key="Bold">&#xf032;</x:String>
             <x:String x:Key="CaretDown">&#xf0d7;</x:String>
+            <x:String x:Key="Check">&#xf00c;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
