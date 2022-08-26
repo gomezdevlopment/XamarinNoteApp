@@ -39,8 +39,9 @@
                 Margin="20, 0"
                 Placeholder="Type here..."
                 HeightRequest="500"
-                Text="{Binding NewNoteText}" />
-
+                Text="{Binding NewNoteText}"
+                FontSize="{Binding FontSize}"
+                FontAttributes="{Binding FontAttribute}" />
             <ui:Toolbar />
         </StackLayout>
     </ContentPage.Content>

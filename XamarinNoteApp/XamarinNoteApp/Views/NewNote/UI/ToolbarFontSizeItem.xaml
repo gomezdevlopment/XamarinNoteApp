@@ -9,7 +9,7 @@
              xct:CornerRadiusEffect.CornerRadius="30"
              xct:TouchEffect.NativeAnimation="True">
     <Label
-           Text="15"
+           Text="{Binding FontSize}"
            VerticalTextAlignment="Center"
            HorizontalTextAlignment="Center"
            HeightRequest="50"

@@ -15,14 +15,14 @@
             </Style>
         </ui:ToolbarButton.Resources>
     </ui:ToolbarButton>
-    <ui:ToolbarButton>
+    <ui:ToolbarButton xct:TouchEffect.Command="{Binding BoldTextCommand}">
         <ui:ToolbarButton.Resources>
             <Style TargetType="Label">
                 <Setter TargetName="Icon" Property="Text" Value="{StaticResource Bold}" />
             </Style>
         </ui:ToolbarButton.Resources>
     </ui:ToolbarButton>
-    <ui:ToolbarButton>
+    <ui:ToolbarButton xct:TouchEffect.Command="{Binding ItalicizeTextCommand}">
         <ui:ToolbarButton.Resources>
             <Style TargetType="Label">
                 <Setter TargetName="Icon" Property="Text" Value="{StaticResource Italic}" />
@@ -36,5 +36,5 @@
             </Style>
         </ui:ToolbarButton.Resources>
     </ui:ToolbarButton>
-    <ui:ToolbarFontSizeItem />
+    <ui:ToolbarFontSizeItem xct:TouchEffect.Command="{Binding OpenFontSizePopupCommand}" />
 </FlexLayout>

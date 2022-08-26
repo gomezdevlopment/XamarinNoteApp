@@ -15,16 +15,51 @@ namespace XamarinNoteApp.ViewModels
     {
         public ICommand SaveNoteCommand => new Command(SaveNote);
         public ICommand OpenMenuCommand => new Command(OpenMenu);
+        public ICommand OpenFontSizePopupCommand => new Command(OpenFontSizePopup);
         public ICommand ChangeNoteColorCommand => new Command(ChangeNoteColor);
+        public ICommand BoldTextCommand => new Command(BoldText);
+        public ICommand ItalicizeTextCommand => new Command(ItalicizeText);
+        public ICommand ChangeFontSizeCommand => new Command(ChangeFontSize);
 
         public String NewNoteTitle { get; set; }
         public String NewNoteText { get; set; }
         public String NewNoteDate { get; set; }
         public ObservableCollection<int> NoteColors { get; set; }
+        public Collection<int> FontSizes { get; set; }
 
         private NoteRepository _noteRepository;
         private MainPageViewModel _mainPageViewModel;
         private Note _note;
+
+        private FontAttributes _fontAttribute = FontAttributes.None;
+
+        public FontAttributes FontAttribute
+        {
+            get => _fontAttribute;
+            set
+            {
+                if (_fontAttribute != value)
+                {
+                    _fontAttribute = value;
+                    OnPropertyChanged(nameof(FontAttribute));
+                }
+            }
+        }
+
+        private int _fontSize = 12;
+
+        public int FontSize
+        {
+            get => _fontSize;
+            set
+            {
+                if (_fontSize != value)
+                {
+                    _fontSize = value;
+                    OnPropertyChanged(nameof(FontSize));
+                }
+            }
+        }
 
         private int _newNoteColor;
 
@@ -53,6 +88,7 @@ namespace XamarinNoteApp.ViewModels
                 ((int)Colors.Red),
                 ((int)Colors.Orange),
             };
+            FontSizes = new Collection<int> { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 32, 36, 40 };
             NewNoteTitle = "";
             NewNoteDate = DateTime.Now.ToString();
             _noteRepository = new NoteRepository();
@@ -88,16 +124,38 @@ namespace XamarinNoteApp.ViewModels
         private void OpenMenu()
         {
             var today = DateTime.Now.ToString();
-            Console.WriteLine(today);
             var noteColorSelectionPopup = new NoteColorSelectionPopup();
             noteColorSelectionPopup.BindingContext = this;
             Application.Current.MainPage.Navigation.ShowPopup(noteColorSelectionPopup);
+        }
+
+        private void OpenFontSizePopup()
+        {
+            var fontSizeSelectionPopup = new FontSizeSelectionPopup();
+            fontSizeSelectionPopup.BindingContext = this;
+            Application.Current.MainPage.Navigation.ShowPopup(fontSizeSelectionPopup);
         }
 
         private void ChangeNoteColor(object o)
         {
             int color = (int)o;
             NewNoteColor = color;
+        }
+
+        private void BoldText()
+        {
+            FontAttribute = FontAttributes.Bold;
+        }
+
+        private void ItalicizeText()
+        {
+            FontAttribute = FontAttributes.Italic;
+        }
+
+        private void ChangeFontSize(object o)
+        {
+            int fontSize = (int)o;
+            FontSize = fontSize;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
