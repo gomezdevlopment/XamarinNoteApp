@@ -125,12 +125,23 @@ namespace XamarinNoteApp.ViewModels
             {
                 if (_selectionMode == SelectionMode.None)
                 {
-                    ShowFab = false;
-                    MultiSelectEnabled = true;
+                    ShowOrHideToolbar();
                     SelectionMode = SelectionMode.Multiple;
                     SelectedNotes.Add(selectedNote);
                 }
             }
+        }
+
+        public void ShowOrHideToolbar()
+        {
+            Console.WriteLine("Back pressed");
+            Console.WriteLine(MultiSelectEnabled);
+            MultiSelectEnabled = !MultiSelectEnabled;
+            ShowFab = !ShowFab;
+            if (MultiSelectEnabled)
+                SelectionMode = SelectionMode.Multiple;
+            else
+                SelectionMode = SelectionMode.None;
         }
 
         public ICommand DeleteNotesCommand => new Command(DeleteNotes);
@@ -142,8 +153,7 @@ namespace XamarinNoteApp.ViewModels
                 Console.WriteLine(note.Id + " this is a note id");
                 await _noteRepository.DeleteNote(note);
             }
-            ShowFab = true;
-            MultiSelectEnabled = false;
+            ShowOrHideToolbar();
             SelectionMode = SelectionMode.None;
             GetNotesFromDb();
         }

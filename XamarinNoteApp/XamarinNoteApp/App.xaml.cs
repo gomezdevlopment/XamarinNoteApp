@@ -3,6 +3,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinNoteApp.Data;
+using XamarinNoteApp.ViewModels;
 
 namespace XamarinNoteApp
 {
@@ -26,7 +27,9 @@ namespace XamarinNoteApp
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            var mainPageViewModel = new MainPageViewModel();
+            MainPage = new NavigationPage(new MainPage(mainPageViewModel));
+            MainPage.BindingContext = mainPageViewModel;
         }
 
         protected override void OnStart()

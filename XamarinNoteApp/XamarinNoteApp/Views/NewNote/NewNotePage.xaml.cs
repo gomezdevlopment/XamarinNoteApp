@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinNoteApp.Models;
+using XamarinNoteApp.ViewModels;
 
 namespace XamarinNoteApp.Views.NewNote
 {

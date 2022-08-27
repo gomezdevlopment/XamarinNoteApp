@@ -13,9 +13,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <local:MainPageViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <AbsoluteLayout>
         <ScrollView AbsoluteLayout.LayoutBounds = "0,0,1,1" AbsoluteLayout.LayoutFlags = "All">
