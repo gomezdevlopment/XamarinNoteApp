@@ -4,6 +4,7 @@
              xmlns:converters="clr-namespace:XamarinNoteApp.Converters"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:ui="clr-namespace:XamarinNoteApp.Views.NewNote.UI"
+             xmlns:local="clr-namespace:XamarinNoteApp.CustomRenderers"
              x:Class="XamarinNoteApp.Views.NewNote.NewNotePage">
 
     <ContentPage.Resources>
@@ -13,7 +14,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{Binding NewNoteColor, Converter={StaticResource colorConverter}}">
+        <FlexLayout Direction="Column" BackgroundColor="{Binding NewNoteColor, Converter={StaticResource colorConverter}}">
             <FlexLayout Direction="Row" HeightRequest="60" Margin="10, 0" AlignItems="Center">
                 <ImageButton
                     Command="{Binding SaveNoteCommand}"
@@ -24,7 +25,7 @@
                     Padding="15"
                     CornerRadius="30"
                     xct:TouchEffect.NativeAnimation="True" />
-                <Entry Placeholder="Title" Text="{Binding NewNoteTitle}" FlexLayout.Grow="1" />
+                <local:EntryNoUnderline Placeholder="Title" Text="{Binding NewNoteTitle}" FlexLayout.Grow="1" />
                 <ImageButton
                     Command="{Binding OpenMenuCommand}"
                     Source="menuDots.png"
@@ -35,14 +36,14 @@
                     CornerRadius="30"
                     xct:TouchEffect.NativeAnimation="True" />
             </FlexLayout>
-            <Editor
+            <local:EditorNoUnderline
                 Margin="20, 0"
                 Placeholder="Type here..."
-                HeightRequest="500"
                 Text="{Binding NewNoteText}"
                 FontSize="{Binding FontSize}"
-                FontAttributes="{Binding FontAttribute}" />
+                FontAttributes="{Binding FontAttribute}"
+                FlexLayout.Grow="1" />
             <ui:Toolbar />
-        </StackLayout>
+        </FlexLayout>
     </ContentPage.Content>
 </ContentPage>

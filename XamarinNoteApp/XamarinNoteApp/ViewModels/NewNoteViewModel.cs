@@ -46,7 +46,7 @@ namespace XamarinNoteApp.ViewModels
             }
         }
 
-        private int _fontSize = 12;
+        private int _fontSize = 18;
 
         public int FontSize
         {
