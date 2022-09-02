@@ -37,6 +37,8 @@
                     xct:TouchEffect.NativeAnimation="True" />
             </FlexLayout>
             <local:EditorNoUnderline
+                x:Name="editor"
+                Keyboard="Chat"
                 Margin="20, 0"
                 Placeholder="Type here..."
                 Text="{Binding NewNoteText}"

@@ -13,6 +13,7 @@
             <x:String x:Key="Bold">&#xf032;</x:String>
             <x:String x:Key="CaretDown">&#xf0d7;</x:String>
             <x:String x:Key="Check">&#xf00c;</x:String>
+            <Color x:Key="LightGray">#f7f7f7</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

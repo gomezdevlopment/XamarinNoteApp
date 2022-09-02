@@ -16,14 +16,18 @@ namespace XamarinNoteApp.ViewModels
         public ICommand SaveNoteCommand => new Command(SaveNote);
         public ICommand OpenMenuCommand => new Command(OpenMenu);
         public ICommand OpenFontSizePopupCommand => new Command(OpenFontSizePopup);
+        public ICommand OpenJustifyTextPopupCommand => new Command(OpenJustifyTextPopup);
         public ICommand ChangeNoteColorCommand => new Command(ChangeNoteColor);
         public ICommand BoldTextCommand => new Command(BoldText);
         public ICommand ItalicizeTextCommand => new Command(ItalicizeText);
         public ICommand ChangeFontSizeCommand => new Command(ChangeFontSize);
+        public ICommand AlignTextLeftCommand => new Command(AlignTextLeft);
+        public ICommand AlignTextCenterCommand => new Command(AlignTextCenter);
+        public ICommand AlignTextRightCommand => new Command(AlignTextRight);
 
-        public String NewNoteTitle { get; set; }
-        public String NewNoteText { get; set; }
-        public String NewNoteDate { get; set; }
+        public string NewNoteTitle { get; set; }
+        public string NewNoteText { get; set; }
+        public string NewNoteDate { get; set; }
         public ObservableCollection<int> NoteColors { get; set; }
         public Collection<int> FontSizes { get; set; }
 
@@ -42,6 +46,21 @@ namespace XamarinNoteApp.ViewModels
                 {
                     _fontAttribute = value;
                     OnPropertyChanged(nameof(FontAttribute));
+                }
+            }
+        }
+
+        private int _textAlignment = 0;
+
+        public int TextAlignment
+        {
+            get => _textAlignment;
+            set
+            {
+                if (_textAlignment != value)
+                {
+                    _textAlignment = value;
+                    OnPropertyChanged(nameof(TextAlignment));
                 }
             }
         }
@@ -123,7 +142,6 @@ namespace XamarinNoteApp.ViewModels
 
         private void OpenMenu()
         {
-            var today = DateTime.Now.ToString();
             var noteColorSelectionPopup = new NoteColorSelectionPopup();
             noteColorSelectionPopup.BindingContext = this;
             Application.Current.MainPage.Navigation.ShowPopup(noteColorSelectionPopup);
@@ -134,6 +152,13 @@ namespace XamarinNoteApp.ViewModels
             var fontSizeSelectionPopup = new FontSizeSelectionPopup();
             fontSizeSelectionPopup.BindingContext = this;
             Application.Current.MainPage.Navigation.ShowPopup(fontSizeSelectionPopup);
+        }
+
+        private void OpenJustifyTextPopup()
+        {
+            var justifyTextSelectionPopup = new JustifyTextSelectionPopup();
+            justifyTextSelectionPopup.BindingContext = this;
+            Application.Current.MainPage.Navigation.ShowPopup(justifyTextSelectionPopup);
         }
 
         private void ChangeNoteColor(object o)
@@ -156,6 +181,21 @@ namespace XamarinNoteApp.ViewModels
         {
             int fontSize = (int)o;
             FontSize = fontSize;
+        }
+
+        private void AlignTextLeft()
+        {
+            TextAlignment = 0;
+        }
+
+        private void AlignTextCenter()
+        {
+            TextAlignment = 1;
+        }
+
+        private void AlignTextRight()
+        {
+            TextAlignment = 2;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

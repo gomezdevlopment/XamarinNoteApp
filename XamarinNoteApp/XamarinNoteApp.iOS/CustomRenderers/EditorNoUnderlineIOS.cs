@@ -1,4 +1,5 @@
-﻿using UIKit;
+﻿using System.ComponentModel;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using XamarinNoteApp.CustomRenderers;
@@ -17,6 +18,23 @@ namespace XamarinNoteApp.iOS.CustomRenderers
             {
                 Control.BackgroundColor = UIColor.FromWhiteAlpha(1, 1);
                 Control.Layer.BorderWidth = 0;
+                Control.TextAlignment = UITextAlignment.Center;
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == EditorNoUnderline.AlignmentProperty.PropertyName)
+            {
+                var editor = sender as EditorNoUnderline;
+                if (editor.Alignment == 0)
+                    Control.TextAlignment = UITextAlignment.Left;
+                else if (editor.Alignment == 1)
+                    Control.TextAlignment = UITextAlignment.Center;
+                else
+                    Control.TextAlignment = UITextAlignment.Right;
+                Control.SetNeedsDisplay();
             }
         }
     }

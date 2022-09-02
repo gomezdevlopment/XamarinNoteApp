@@ -84,9 +84,8 @@ namespace XamarinNoteApp.ViewModels
 
         private async void OpenNewNoteScreen()
         {
-            Console.WriteLine("Open");
             var newNoteVM = new NewNoteViewModel(this, null);
-            var newNotePage = new NewNotePage();
+            var newNotePage = new NewNotePage(newNoteVM);
             newNotePage.BindingContext = newNoteVM;
             await Application.Current.MainPage.Navigation.PushAsync(newNotePage);
         }
@@ -110,7 +109,7 @@ namespace XamarinNoteApp.ViewModels
                 if (_selectionMode == SelectionMode.None)
                 {
                     var newNoteVM = new NewNoteViewModel(this, selectedNote);
-                    var newNotePage = new NewNotePage();
+                    var newNotePage = new NewNotePage(newNoteVM);
                     newNotePage.BindingContext = newNoteVM;
                     await Application.Current.MainPage.Navigation.PushAsync(newNotePage);
                 }
@@ -134,8 +133,6 @@ namespace XamarinNoteApp.ViewModels
 
         public void ShowOrHideToolbar()
         {
-            Console.WriteLine("Back pressed");
-            Console.WriteLine(MultiSelectEnabled);
             MultiSelectEnabled = !MultiSelectEnabled;
             ShowFab = !ShowFab;
             if (MultiSelectEnabled)
@@ -150,7 +147,6 @@ namespace XamarinNoteApp.ViewModels
         {
             foreach (Note note in SelectedNotes)
             {
-                Console.WriteLine(note.Id + " this is a note id");
                 await _noteRepository.DeleteNote(note);
             }
             ShowOrHideToolbar();

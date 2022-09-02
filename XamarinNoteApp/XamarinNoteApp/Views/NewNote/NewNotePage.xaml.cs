@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using XamarinNoteApp.Models;
+﻿using Xamarin.Forms;
+using XamarinNoteApp.CustomRenderers;
 using XamarinNoteApp.ViewModels;
 
 namespace XamarinNoteApp.Views.NewNote
 {
     public partial class NewNotePage : ContentPage
     {
-        public NewNotePage()
+        public NewNoteViewModel _newNoteViewModel;
+
+        public NewNotePage(NewNoteViewModel newNoteViewModel)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            _newNoteViewModel = newNoteViewModel;
+            editor.SetBinding(EditorNoUnderline.AlignmentProperty, "TextAlignment");
         }
     }
 }

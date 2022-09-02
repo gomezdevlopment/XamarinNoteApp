@@ -1,4 +1,6 @@
 ﻿using Android.Content;
+using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XamarinNoteApp.CustomRenderers;
@@ -21,6 +23,32 @@ namespace XamarinNoteApp.Droid.CustomRenderers
             {
                 Control.Background = null;
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                Control.Gravity = Android.Views.GravityFlags.CenterHorizontal;
+                if (e.NewElement is EditorNoUnderline newElement)
+                {
+                    if (newElement.Alignment == 0)
+                        Control.Gravity = Android.Views.GravityFlags.Start;
+                    else if (newElement.Alignment == 1)
+                        Control.Gravity = Android.Views.GravityFlags.CenterHorizontal;
+                    else
+                        Control.Gravity = Android.Views.GravityFlags.End;
+                }
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == EditorNoUnderline.AlignmentProperty.PropertyName)
+            {
+                var editor = sender as EditorNoUnderline;
+                if (editor.Alignment == 0)
+                    Control.Gravity = Android.Views.GravityFlags.Start;
+                else if (editor.Alignment == 1)
+                    Control.Gravity = Android.Views.GravityFlags.CenterHorizontal;
+                else
+                    Control.Gravity = Android.Views.GravityFlags.End;
+                Control.Invalidate();
             }
         }
     }

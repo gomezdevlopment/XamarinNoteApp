@@ -8,7 +8,7 @@
              Direction="Row"
              BackgroundColor="White"
              HeightRequest="50">
-    <ui:ToolbarButton>
+    <ui:ToolbarButton xct:TouchEffect.Command="{Binding OpenJustifyTextPopupCommand}">
         <ui:ToolbarButton.Resources>
             <Style TargetType="Label">
                 <Setter TargetName="Icon" Property="Text" Value="{StaticResource Justify}" />

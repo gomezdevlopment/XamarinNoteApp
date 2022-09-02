@@ -39,6 +39,9 @@
 		<EmbeddedResource Update="Views\NewNote\Popups\FontSizeSelectionPopup.xaml">
 		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
+		<EmbeddedResource Update="Views\NewNote\Popups\JustifyTextSelectionPopup.xaml">
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
 		<EmbeddedResource Update="Views\NewNote\Popups\NoteColorSelectionPopup.xaml">
 		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
