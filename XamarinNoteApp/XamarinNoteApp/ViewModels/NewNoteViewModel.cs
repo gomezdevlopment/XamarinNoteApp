@@ -169,12 +169,18 @@ namespace XamarinNoteApp.ViewModels
 
         private void BoldText()
         {
-            FontAttribute = FontAttributes.Bold;
+            if (FontAttribute != FontAttributes.Bold)
+                FontAttribute = FontAttributes.Bold;
+            else
+                FontAttribute = FontAttributes.None;
         }
 
         private void ItalicizeText()
         {
-            FontAttribute = FontAttributes.Italic;
+            if (FontAttribute != FontAttributes.Italic)
+                FontAttribute = FontAttributes.Italic;
+            else
+                FontAttribute = FontAttributes.None;
         }
 
         private void ChangeFontSize(object o)
